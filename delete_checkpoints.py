@@ -78,7 +78,13 @@ def main():
         description="Recursively find 'checkpoints' directories and delete all subdirectories except the newest (by mtime)."
     )
     ap.add_argument("root", type=Path, help="Root directory to traverse")
-    ap.add_argument("--dry-run", action="store_true", help="Print what would be deleted")
+    ap.add_argument(
+        "--execute",
+        dest="dry_run",
+        action="store_false",
+        default=True,
+        help="Actually archive and delete (default: dry-run).",
+    )
     ap.add_argument("--follow-symlinks", action="store_true", help="Follow directory symlinks (loop-protected)")
     args = ap.parse_args()
 

@@ -59,7 +59,13 @@ def delete_wandb_dirs(root: Path, follow_symlinks: bool, dry_run: bool) -> int:
 def main():
     p = argparse.ArgumentParser(description="Recursively delete directories named 'wandb'.")
     p.add_argument("root", type=Path, help="Root directory to traverse")
-    p.add_argument("--dry-run", action="store_true", help="Print what would be deleted")
+    p.add_argument(
+        "--execute",
+        dest="dry_run",
+        action="store_false",
+        default=True,
+        help="Actually archive and delete (default: dry-run).",
+    )
     p.add_argument("--follow-symlinks", action="store_true", help="Follow directory symlinks (loop-protected)")
     args = p.parse_args()
 
